@@ -2,7 +2,9 @@ const userUrl = 'https://randomuser.me/api/?results=12&nat=us&noinfo';
 const userCards = document.getElementsByClassName('card');
 const gallery = document.getElementById('gallery');
 
-
+/*--- 
+The fetchUserData function fetches the JSON file from the given url and parses the JSON returning a usable array called users.
+---*/
 async function fetchUserData(url){
 const res = await fetch(url);
 const usersJSON = await res.json();
@@ -10,6 +12,9 @@ const users = await usersJSON.results;
 return users;
 }
 
+/*--- 
+The generateUsers function takes the data that was received from the fetchUserData function and created cards for each of the users with information on them.
+---*/
 function generateUsers(data) {
   let output = '';
 
@@ -33,6 +38,9 @@ function generateUsers(data) {
 
 };
 
+/*--- 
+The generateUserModules function listens for a click even on the user cards. When a user card is click, a module for the individual is create with more information on the user. To exit the module you click the 'X' and the module element is removed
+---*/
 function generateUserModules(data){
 
 
@@ -77,7 +85,7 @@ function generateUserModules(data){
 };
 
 
-
+//Calls the above functions
 fetchUserData(userUrl)
   .then(data => {
     generateUsers(data); 
