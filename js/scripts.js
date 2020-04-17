@@ -1,4 +1,4 @@
-const userUrl = 'https://randomuser.me/api/?results=12&noinfo';
+const userUrl = 'https://randomuser.me/api/?results=12&nat=us&noinfo';
 const userCards = document.getElementsByClassName('card');
 const gallery = document.getElementById('gallery');
 
@@ -83,4 +83,4 @@ fetchUserData(userUrl)
     generateUsers(data); 
     generateUserModules(data);
   })
-  .catch()
+  .catch(error => console.log('There seems to be an issue', error));
