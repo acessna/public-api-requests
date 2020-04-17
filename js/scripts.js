@@ -4,7 +4,6 @@ const gallery = document.getElementById('gallery');
 
 
 async function fetchUserData(url){
-
 const res = await fetch(url);
 const usersJSON = await res.json();
 const users = await usersJSON.results;
@@ -36,9 +35,14 @@ function generateUsers(data) {
 
 function generateUserModules(data){
 
+
   for (let i = 0; i < userCards.length; i++) {
     userCards[i].addEventListener('click', () =>{
-      console.log('click'); 
+
+      const month = data[i].dob.date.substr(5,2);
+      const day = data[i].dob.date.substr(8,2);
+      const year = data[i].dob.date.substr(0,4);
+
       let output = '';
       output = `
       <div class="modal-container">
@@ -51,8 +55,8 @@ function generateUserModules(data){
               <p class="modal-text cap">${data[i].location.city}</p>
               <hr>
               <p class="modal-text">${data[i].phone}</p>
-              <p class="modal-text">${data[i].location.street}, ${data[i].location.city}, ${data[i].location.state} 97204</p>
-              <p class="modal-text">Birthday: ${data[i].dob.date}</p>
+              <p class="modal-text">${data[i].location.street.number} ${data[i].location.street.name}, ${data[i].location.city}, ${data[i].location.state} 97204</p>
+              <p class="modal-text">Birthday: ${month}/${day}/${year}</p>
           </div>
       </div>
       `;
@@ -78,4 +82,5 @@ fetchUserData(userUrl)
   .then(data => {
     generateUsers(data); 
     generateUserModules(data);
-  });
+  })
+  .catch()
